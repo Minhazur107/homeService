@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Account - S24 Service Directory</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="../assets/css/styles.css" rel="stylesheet">
+    <style>
+        .register-bg {
+            background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80');
+            background-size: cover;
+            background-position: center;
+            min-height: 100vh;
+        }
+        .form-container {
+            backdrop-filter: blur(10px);
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        .step-indicator {
+            position: relative;
+            z-index: 1;
+        }
+        .step-indicator::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: rgba(255, 255, 255, 0.2);
+            z-index: -1;
+        }
+        .step {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            background: rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.7);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+        }
+        .step.active {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+        .step.completed {
+            background: var(--success);
+            color: white;
+            border-color: var(--success);
+        }
+        .form-step {
+            display: none;
+            animation: fadeIn 0.3s ease-out;
+        }
+        .form-step.active {
+            display: block;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .password-strength {
+            height: 4px;
+            background: #e2e8f0;
+            border-radius: 2px;
+            margin-top: 4px;
+            overflow: hidden;
+        }
+        .password-strength-fill {
+            height: 100%;
+            width: 0%;
+            background: #ef4444;
+            transition: width 0.3s ease, background 0.3s ease;
+        }
+    </style>
+</head>
+<body class="theme-purple min-h-screen flex items-center justify-center p-4 register-bg">
+    <div class="w-full max-w-2xl">
+        <!-- Logo and Back Home -->
+        <div class="text-center mb-8">
+            <a href="../index.html" class="inline-block mb-4">
+                <span class="text-2xl font-bold text-white">S24</span>
+            </a>
+            <h1 class="text-3xl font-bold text-white">Create Your Account</h1>
+            <p class="text-gray-200 mt-2">Join our community of service providers and customers</p>
+        </div>
+
+        <!-- Progress Steps -->
+        <div class="mb-8">
+            <div class="step-indicator flex justify-between relative mb-4">
+                <div class="step active" id="step1Indicator">1</div>
+                <div class="step" id="step2Indicator">2</div>
+                <div class="step" id="step3Indicator">3</div>
+            </div>
+            <div class="flex justify-between text-sm text-white/80 px-2">
+                <span>Account</span>
+                <span>Profile</span>
+                <span>Complete</span>
+            </div>
+        </div>
+
+        <div class="form-container rounded-2xl shadow-xl p-8">
+            <!-- Registration Form -->
+            <form id="registerForm" class="space-y-6" novalidate>
+                <!-- Step 1: Account Information -->
+                <div class="form-step active" id="step1">
+                    <h2 class="text-xl font-semibold text-white mb-6">Account Information</h2>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <!-- First Name -->
+                        <div>
+                            <label for="firstName" class="block text-sm font-medium text-white mb-1">First Name</label>
+                            <div class="relative">
+                                <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                    <i class="fas fa-user text-gray-400"></i>
+                                </div>
+                                <input type="text" id="firstName" name="firstName" required 
+                                    class="block w-full pl-10 pr-3 py-3 bg-white/10 border border-white/20 text-white placeholder-gray-300 rounded-lg focus:ring-2 focus:ring-white focus:border-transparent"
+                                    placeholder="Sifat">
+                                <div class="invalid-feedback absolute text-sm text-red-300 mt-1 hidden">
+                                    First name is required
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Last Name -->
+                        <div>
+                            <label for="lastName" class="block text-sm font-medium text-white mb-1">Last Name</label>
+                            <div class="relative">
+                                <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                    <i class="fas fa-user text-gray-400"></i>
+                                </div>
+                                <input type="text" id="lastName" name="lastName" required 
+                                    class="block w-full pl-10 pr-3 py-3 bg-white/10 border border-white/20 text-white placeholder-gray-300 rounded-lg focus:ring-2 focus:ring-white focus:border-transparent"
+                                    placeholder="Zaman">
+                                <div class="invalid-feedback absolute text-sm text-red-300 mt-1 hidden">
+                                    Last name is required
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Email -->
+                    <div class="mt-4">
+                        <label for="email" class="block text-sm font-medium text-white mb-1">Email Address</label>
+                        <div class="relative">
+                            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                <i class="fas fa-envelope text-gray-400"></i>
+                            </div>
+                            <input type="email" id="email" name="email" required 
+                                class="block w-full pl-10 pr-3 py-3 bg-white/10 border border-white/20 text-white placeholder-gray-300 rounded-lg focus:ring-2 focus:ring-white focus:border-transparent"
+                                placeholder="you@example.com">
+                            <div class="invalid-feedback absolute text-sm text-red-300 mt-1 hidden">
+                                Please enter a valid email address
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Password -->
+                    <div class="mt-4">
+                        <label for="password" class="block text-sm font-medium text-white mb-1">Password</label>
+                        <div class="relative">
+                            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                <i class="fas fa-lock text-gray-400"></i>
+                            </div>
+                            <input type="password" id="password" name="password" required 
+                                class="block w-full pl-10 pr-10 py-3 bg-white/10 border border-white/20 text-white placeholder-gray-300 rounded-lg focus:ring-2 focus:ring-white focus:border-transparent"
+                                placeholder="••••••••">
+                            <button type="button" class="absolute inset-y-0 right-0 pr-3 flex items-center" id="togglePassword">
+                                <i class="fas fa-eye text-gray-400 hover:text-white cursor-pointer"></i>
+                            </button>
+                            <div class="invalid-feedback absolute text-sm text-red-300 mt-1 hidden">
+                                Password must be at least 8 characters
+                            </div>
+                        </div>
+                        <div class="password-strength mt-2">
+                            <div class="password-strength-fill" id="passwordStrength"></div>
+                        </div>
+                        <p class="text-xs text-gray-300 mt-1" id="passwordHelp">
+                            Use 8 or more characters with a mix of letters, numbers & symbols
+                        </p>
+                    </div>
+
+                    <!-- Confirm Password -->
+                    <div class="mt-4">
+                        <label for="confirmPassword" class="block text-sm font-medium text-white mb-1">Confirm Password</label>
+                        <div class="relative">
+                            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                <i class="fas fa-lock text-gray-400"></i>
+                            </div>
+                            <input type="password" id="confirmPassword" name="confirmPassword" required 
+                                class="block w-full pl-10 pr-3 py-3 bg-white/10 border border-white/20 text-white placeholder-gray-300 rounded-lg focus:ring-2 focus:ring-white focus:border-transparent"
+                                placeholder="••••••••">
+                            <div class="invalid-feedback absolute text-sm text-red-300 mt-1 hidden">
+                                Passwords do not match
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="flex justify-end mt-8">
+                        <button type="button" id="nextBtn1" class="btn-primary px-6 py-3 rounded-lg font-medium">
+                            Next <i class="fas fa-arrow-right ml-2"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Step 2: Profile Information -->
+                <div class="form-step" id="step2">
+                    <h2 class="text-xl font-semibold text-white mb-6">Profile Information</h2>
+                    
+                    <!-- User Type -->
+                    <div class="mb-6">
+                        <label class="block text-sm font-medium text-white mb-3">I am a</label>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <label class="relative">
+                                <input type="radio" name="userType" value="customer" class="peer hidden" checked>
+                                <div class="p-4 border-2 border-white/20 rounded-lg cursor-pointer transition-colors hover:border-white/40 peer-checked:border-purple-500 peer-checked:bg-purple-500/10">
+                                    <div class="flex items-center">
+                                        <div class="w-10 h-10 rounded-full bg-purple-500/20 flex items-center justify-center mr-3">
+                                            <i class="fas fa-user text-purple-400"></i>
+                                        </div>
+                                        <div>
+                                            <h4 class="font-medium text-white">Customer</h4>
+                                            <p class="text-sm text-gray-300">Looking for services</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="absolute top-2 right-2 w-5 h-5 rounded-full border-2 border-white/20 flex items-center justify-center peer-checked:bg-purple-500 peer-checked:border-purple-500">
+                                    <i class="fas fa-check text-white text-xs opacity-0 peer-checked:opacity-100"></i>
+                                </div>
+                            </label>
+                            
+                            <label class="relative">
+                                <input type="radio" name="userType" value="provider" class="peer hidden">
+                                <div class="p-4 border-2 border-white/20 rounded-lg cursor-pointer transition-colors hover:border-white/40 peer-checked:border-purple-500 peer-checked:bg-purple-500/10">
+                                    <div class="flex items-center">
+                                        <div class="w-10 h-10 rounded-full bg-purple-500/20 flex items-center justify-center mr-3">
+                                            <i class="fas fa-tools text-purple-400"></i>
+                                        </div>
+                                        <div>
+                                            <h4 class="font-medium text-white">Service Provider</h4>
+                                            <p class="text-sm text-gray-300">Offering services</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="absolute top-2 right-2 w-5 h-5 rounded-full border-2 border-white/20 flex items-center justify-center peer-checked:bg-purple-500 peer-checked:border-purple-500">
+                                    <i class="fas fa-check text-white text-xs opacity-0 peer-checked:opacity-100"></i>
+                                </div>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Phone Number -->
+                    <div class="mt-6">
+                        <label for="phone" class="block text-sm font-medium text-white mb-1">Phone Number</label>
+                        <div class="relative">
+                            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                <i class="fas fa-phone text-gray-400"></i>
+                            </div>
+                            <input type="tel" id="phone" name="phone" 
+                                class="block w-full pl-10 pr-3 py-3 bg-white/10 border border-white/20 text-white placeholder-gray-300 rounded-lg focus:ring-2 focus:ring-white focus:border-transparent"
+                                placeholder="+1 (___) ___-____">
+                        </div>
+                    </div>
+
+                    <!-- Address -->
+                    <div class="mt-4">
+                        <label for="address" class="block text-sm font-medium text-white mb-1">Address</label>
+                        <div class="relative">
+                            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                <i class="fas fa-map-marker-alt text-gray-400"></i>
+                            </div>
+                            <input type="text" id="address" name="address" 
+                                class="block w-full pl-10 pr-3 py-3 bg-white/10 border border-white/20 text-white placeholder-gray-300 rounded-lg focus:ring-2 focus:ring-white focus:border-transparent"
+                                placeholder="123 Main St, City, Country">
+                        </div>
+                    </div>
+
+                    <div class="flex justify-between mt-8">
+                        <button type="button" id="backBtn1" class="px-6 py-3 rounded-lg font-medium text-white border border-white/20 hover:bg-white/10 transition">
+                            <i class="fas fa-arrow-left mr-2"></i> Back
+                        </button>
+                        <button type="button" id="nextBtn2" class="btn-primary px-6 py-3 rounded-lg font-medium">
+                            Next <i class="fas fa-arrow-right ml-2"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Step 3: Complete Registration -->
+                <div class="form-step" id="step3">
+                    <div class="text-center py-8">
+                        <div class="w-20 h-20 bg-green-500/20 rounded-full flex items-center justify-center mx-auto mb-6">
+                            <i class="fas fa-check-circle text-green-400 text-4xl"></i>
+                        </div>
+                        <h2 class="text-2xl font-bold text-white mb-2">You're all set!</h2>
+                        <p class="text-gray-300 mb-8 max-w-md mx-auto">
+                            Thank you for registering with S24 Service Directory. We're excited to have you on board!
+                        </p>
+                        
+                        <div class="bg-white/5 p-6 rounded-lg text-left mb-8">
+                            <h3 class="font-medium text-white mb-4">Next Steps</h3>
+                            <ul class="space-y-3">
+                                <li class="flex items-start">
+                                    <i class="fas fa-check-circle text-green-400 mt-1 mr-3"></i>
+                                    <span>Verify your email address (check your inbox)</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-user-check text-blue-400 mt-1 mr-3"></i>
+                                    <span>Complete your profile to get started</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-bell text-yellow-400 mt-1 mr-3"></i>
+                                    <span>Get notified about new services and updates</span>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div class="flex flex-col sm:flex-row justify-center gap-4 mt-8">
+                            <a href="../index.html" class="btn-primary px-6 py-3 rounded-lg font-medium text-center">
+                                Go to Homepage
+                            </a>
+                            <a href="login.html" class="px-6 py-3 rounded-lg font-medium text-center border border-white/20 text-white hover:bg-white/10 transition">
+                                Sign In
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </form>
+
+            <!-- Already have an account? -->
+            <p class="mt-6 text-center text-sm text-white">
+                Already have an account? 
+                <a href="login.html" class="font-medium text-white hover:underline">Sign in</a>
+            </p>
+        </div>
+    </div>
+
+    <script src="../assets/js/main.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Form steps
+            const steps = ['step1', 'step2', 'step3'];
+            let currentStep = 0;
+            
+            // Elements
+            const form = document.getElementById('registerForm');
+            const nextBtn1 = document.getElementById('nextBtn1');
+            const nextBtn2 = document.getElementById('nextBtn2');
+            const backBtn1 = document.getElementById('backBtn1');
+            const togglePassword = document.getElementById('togglePassword');
+            const passwordInput = document.getElementById('password');
+            const confirmPasswordInput = document.getElementById('confirmPassword');
+            const passwordStrength = document.getElementById('passwordStrength');
+            const passwordHelp = document.getElementById('passwordHelp');
+            
+            // Initialize form steps
+            function showStep(stepIndex) {
+                // Hide all steps
+                document.querySelectorAll('.form-step').forEach(step => {
+                    step.classList.remove('active');
+                });
+                
+                // Show current step
+                document.getElementById(steps[stepIndex]).classList.add('active');
+                
+                // Update step indicators
+                document.querySelectorAll('.step').forEach((step, index) => {
+                    step.classList.remove('active', 'completed');
+                    if (index < stepIndex) {
+                        step.classList.add('completed');
+                    } else if (index === stepIndex) {
+                        step.classList.add('active');
+                    }
+                });
+                
+                currentStep = stepIndex;
+            }
+            
+            // Next button click handlers
+            if (nextBtn1) {
+                nextBtn1.addEventListener('click', function() {
+                    if (validateStep1()) {
+                        showStep(1);
+                    }
+                });
+            }
+            
+            if (nextBtn2) {
+                nextBtn2.addEventListener('click', function() {
+                    if (validateStep2()) {
+                        showStep(2);
+                        // In a real app, you would submit the form here
+                        setTimeout(() => {
+                            // form.submit();
+                        }, 2000);
+                    }
+                });
+            }
+            
+            // Back button click handler
+            if (backBtn1) {
+                backBtn1.addEventListener('click', function() {
+                    showStep(0);
+                });
+            }
+            
+            // Toggle password visibility
+            if (togglePassword) {
+                togglePassword.addEventListener('click', function() {
+                    const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+                    passwordInput.setAttribute('type', type);
+                    this.querySelector('i').classList.toggle('fa-eye');
+                    this.querySelector('i').classList.toggle('fa-eye-slash');
+                });
+            }
+            
+            // Password strength indicator
+            if (passwordInput) {
+                passwordInput.addEventListener('input', function() {
+                    const password = this.value;
+                    const strength = calculatePasswordStrength(password);
+                    updatePasswordStrength(strength);
+                    
+                    // Real-time validation
+                    if (password.length > 0 && password.length < 8) {
+                        this.setCustomValidity('Password must be at least 8 characters');
+                        this.classList.add('border-red-400');
+                        passwordHelp.classList.add('text-red-300');
+                    } else {
+                        this.setCustomValidity('');
+                        this.classList.remove('border-red-400');
+                        passwordHelp.classList.remove('text-red-300');
+                    }
+                    
+                    // Check if passwords match
+                    if (confirmPasswordInput && confirmPasswordInput.value) {
+                        validatePasswordMatch();
+                    }
+                });
+            }
+            
+            // Confirm password validation
+            if (confirmPasswordInput) {
+                confirmPasswordInput.addEventListener('input', validatePasswordMatch);
+            }
+            
+            // Form validation for step 1
+            function validateStep1() {
+                const firstName = document.getElementById('firstName');
+                const lastName = document.getElementById('lastName');
+                const email = document.getElementById('email');
+                const password = document.getElementById('password');
+                
+                let isValid = true;
+                
+                // Validate first name
+                if (!firstName.value.trim()) {
+                    showError(firstName, 'First name is required');
+                    isValid = false;
+                } else {
+                    clearError(firstName);
+                }
+                
+                // Validate last name
+                if (!lastName.value.trim()) {
+                    showError(lastName, 'Last name is required');
+                    isValid = false;
+                } else {
+                    clearError(lastName);
+                }
+                
+                // Validate email
+                if (!email.validity.valid) {
+                    showError(email, 'Please enter a valid email address');
+                    isValid = false;
+                } else {
+                    clearError(email);
+                }
+                
+                // Validate password
+                if (password.value.length < 8) {
+                    showError(password, 'Password must be at least 8 characters');
+                    isValid = false;
+                } else if (password.value !== confirmPasswordInput.value) {
+                    showError(confirmPasswordInput, 'Passwords do not match');
+                    isValid = false;
+                } else {
+                    clearError(password);
+                    clearError(confirmPasswordInput);
+                }
+                
+                return isValid;
+            }
+            
+            // Form validation for step 2
+            function validateStep2() {
+                // Add any additional validation for step 2 if needed
+                return true;
+            }
+            
+            // Validate password match
+            function validatePasswordMatch() {
+                if (passwordInput.value !== confirmPasswordInput.value) {
+                    showError(confirmPasswordInput, 'Passwords do not match');
+                    return false;
+                } else {
+                    clearError(confirmPasswordInput);
+                    return true;
+                }
+            }
+            
+            // Show error message
+            function showError(input, message) {
+                const errorElement = input.nextElementSibling;
+                if (errorElement && errorElement.classList.contains('invalid-feedback')) {
+                    errorElement.textContent = message;
+                    errorElement.classList.remove('hidden');
+                    input.classList.add('border-red-400');
+                }
+            }
+            
+            // Clear error message
+            function clearError(input) {
+                const errorElement = input.nextElementSibling;
+                if (errorElement && errorElement.classList.contains('invalid-feedback')) {
+                    errorElement.classList.add('hidden');
+                    input.classList.remove('border-red-400');
+                }
+            }
+            
+            // Calculate password strength
+            function calculatePasswordStrength(password) {
+                let strength = 0;
+                
+                // Length check
+                if (password.length >= 8) strength += 1;
+                // Contains lowercase
+                if (password.match(/[a-z]+/)) strength += 1;
+                // Contains uppercase
+                if (password.match(/[A-Z]+/)) strength += 1;
+                // Contains numbers
+                if (password.match(/[0-9]+/)) strength += 1;
+                // Contains special chars
+                if (password.match(/[!@#$%^&*(),.?":{}|<>]+/)) strength += 1;
+                
+                return strength;
+            }
+            
+            // Update password strength indicator
+            function updatePasswordStrength(strength) {
+                let strengthText = '';
+                let strengthClass = '';
+                let width = 0;
+                
+                switch(strength) {
+                    case 0:
+                    case 1:
+                        strengthText = 'Very Weak';
+                        strengthClass = 'bg-red-500';
+                        width = '20%';
+                        break;
+                    case 2:
+                        strengthText = 'Weak';
+                        strengthClass = 'bg-orange-500';
+                        width = '40%';
+                        break;
+                    case 3:
+                        strengthText = 'Good';
+                        strengthClass = 'bg-yellow-500';
+                        width = '60%';
+                        break;
+                    case 4:
+                        strengthText = 'Strong';
+                        strengthClass = 'bg-blue-500';
+                        width = '80%';
+                        break;
+                    case 5:
+                        strengthText = 'Very Strong';
+                        strengthClass = 'bg-green-500';
+                        width = '100%';
+                        break;
+                }
+                
+                if (passwordStrength) {
+                    passwordStrength.className = 'password-strength-fill ' + strengthClass;
+                    passwordStrength.style.width = width;
+                }
+                
+                if (passwordHelp) {
+                    passwordHelp.textContent = strength > 0 ? 
+                        `Password strength: ${strengthText}` : 
+                        'Use 8 or more characters with a mix of letters, numbers & symbols';
+                }
+            }
+            
+            // Initialize the form
+            showStep(0);
+            
+            // Add animation to form elements
+            const formElements = document.querySelectorAll('input, button, a, .step');
+            formElements.forEach((el, index) => {
+                el.style.opacity = '0';
+                el.style.transform = 'translateY(10px)';
+                el.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
+                
+                setTimeout(() => {
+                    el.style.opacity = '1';
+                    el.style.transform = 'translateY(0)';
+                }, 100 + (index * 30));
+            });
+        });
+    </script>
+</body>
+</html>
