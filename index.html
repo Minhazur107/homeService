@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HOME Service Provider Directory</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="assets/css/styles.css" rel="stylesheet">
+</head>
+<body class="theme-purple">
+    <!-- Header -->
+    <header class="gradient-bg text-white">
+        <nav class="container mx-auto px-4 py-4">
+            <div class="flex justify-between items-center">
+                <div class="flex items-center space-x-4">
+                    <a href="index.html" class="text-2xl font-bold">S24</a>
+                    <span class="text-sm opacity-90 hidden md:inline">Service Directory</span>
+                </div>
+                
+                <div class="flex items-center space-x-4">
+                    <!-- Theme Picker -->
+                    <div class="theme-picker" id="themePicker">
+                        <button type="button" class="px-4 py-2 bg-white bg-opacity-20 rounded-lg flex items-center">
+                            <i class="fas fa-palette mr-2"></i><span class="hidden md:inline">Theme</span>
+                        </button>
+                        <div class="theme-menu hidden" id="themeMenu">
+                            <div class="grid grid-cols-4 gap-2 p-2">
+                                <div class="theme-swatch" style="background:#6d28d9" data-theme="theme-purple" title="Purple"></div>
+                                <div class="theme-swatch" style="background:#10b981" data-theme="theme-emerald" title="Emerald"></div>
+                                <div class="theme-swatch" style="background:#e11d48" data-theme="theme-rose" title="Rose"></div>
+                                <div class="theme-swatch" style="background:#f59e0b" data-theme="theme-amber" title="Amber"></div>
+                                <div class="theme-swatch" style="background:#334155" data-theme="theme-slate" title="Slate"></div>
+                                <div class="theme-swatch" style="background:#06b6d4" data-theme="theme-cyan" title="Cyan"></div>
+                                <div class="theme-swatch" style="background:#ec4899" data-theme="theme-pink" title="Pink"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Navigation Links -->
+                    <div class="hidden md:flex items-center space-x-6">
+                        <a href="index.html" class="text-white hover:bg-white/10 px-3 py-2 rounded-lg">Home</a>
+                        <a href="#services" class="text-white hover:bg-white/10 px-3 py-2 rounded-lg">Services</a>
+                        <a href="#how-it-works" class="text-white hover:bg-white/10 px-3 py-2 rounded-lg">How It Works</a>
+                        <a href="#Reviews" class="text-white hover:bg-white/10 px-3 py-2 rounded-lg">Review</a>
+                    </div>
+
+                    <!-- Auth Buttons -->
+                    <div class="hidden md:flex items-center space-x-2 ml-4">
+                        <a href="auth/login.html" class="px-4 py-2 text-sm font-medium text-white hover:bg-white/10 rounded-lg transition">Log In</a>
+                        <a href="auth/register.html" class="px-4 py-2 text-sm font-medium text-white bg-white/20 hover:bg-white/30 rounded-lg transition">Sign Up</a>
+                    </div>
+
+                    <!-- Mobile Menu Button -->
+                    <button id="mobileMenuButton" class="md:hidden text-white focus:outline-none">
+                        <i class="fas fa-bars text-2xl"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Mobile Menu -->
+            <div id="mobileMenu" class="md:hidden hidden mt-4 pb-4">
+                <a href="index.html" class="block text-white hover:bg-white/10 px-3 py-2 rounded-lg mb-1">Home</a>
+                <a href="#services" class="block text-white hover:bg-white/10 px-3 py-2 rounded-lg mb-1">Services</a>
+                <a href="#how-it-works" class="block text-white hover:bg-white/10 px-3 py-2 rounded-lg mb-1">How It Works</a>
+                <a href="#Reviews" class="block text-white hover:bg-white/10 px-3 py-2 rounded-lg mb-4">Review</a>
+                <div class="border-t border-white/20 pt-4">
+                    <a href="auth/login.html" class="block text-center text-white hover:bg-white/10 px-3 py-2 rounded-lg mb-2">Log In</a>
+                    <a href="auth/register.html" class="block text-center text-white bg-white/20 hover:bg-white/30 px-3 py-2 rounded-lg">Sign Up</a>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="relative h-[500px] flex items-center justify-center bg-cover bg-center" style="background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('https://images.unsplash.com/photo-1521791136064-0c4c3acd3789?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80');">
+        <div class="container mx-auto px-4 text-center text-white">
+            <h1 class="text-4xl md:text-6xl font-bold mb-6">Find Verified Local Service Providers</h1>
+            <p class="text-xl mb-8 max-w-2xl mx-auto">Connect with trusted professionals for all your service needs. Fast, reliable, and hassle-free.</p>
+            
+            <div class="max-w-2xl mx-auto bg-white rounded-lg p-1 shadow-xl">
+                <div class="flex flex-col md:flex-row">
+                    <input type="text" placeholder="What service are you looking for?" class="flex-1 px-6 py-4 rounded-lg focus:outline-none text-gray-800">
+                    <input type="text" placeholder="Location" class="px-6 py-4 md:border-l border-gray-200 focus:outline-none text-gray-800">
+                    <button class="btn-primary px-8 py-4">Search</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Categories Section -->
+    <section id="services" class="py-16 bg-gradient-to-br from-purple-50 via-pink-50 to-blue-50">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="text-4xl font-bold text-gray-800 mb-4">Popular Service Categories</h2>
+                <p class="text-xl text-gray-600">Browse services by category</p>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+                <!-- Plumbing Service -->
+                <div class="bg-white rounded-xl shadow-md overflow-hidden group transform transition-all duration-300 hover:-translate-y-1 hover:shadow-lg">
+                    <div class="h-48 bg-gray-100 flex items-center justify-center">
+                        <img src="assets/images/default/categories/plumbing.svg" alt="Plumbing" class="h-24 w-24">
+                    </div>
+                    <div class="p-6">
+                        <div class="flex justify-between items-center">
+                            <h3 class="text-xl font-bold mb-2 group-hover:text-purple-600 transition">Plumbing</h3>
+                            <span class="text-lg font-semibold text-purple-600"></span>
+                        </div>
+                        <p class="text-gray-600">Expert plumbing services for homes and businesses</p>
+                    </div>
+                </div>
+
+                <!-- Electrical Service -->
+                <div class="bg-white rounded-xl shadow-md overflow-hidden group transform transition-all duration-300 hover:-translate-y-1 hover:shadow-lg">
+                    <div class="h-48 bg-gray-100 flex items-center justify-center">
+                        <img src="assets/images/default/categories/electrical.svg" alt="Electrical" class="h-24 w-24">
+                    </div>
+                    <div class="p-6">
+                        <div class="flex justify-between items-center">
+                            <h3 class="text-xl font-bold mb-2 group-hover:text-purple-600 transition">Electrical</h3>
+                            <span class="text-lg font-semibold text-purple-600"></span>
+                        </div>
+                        <p class="text-gray-600">Professional electrical services and repairs</p>
+                    </div>
+                </div>
+
+                <!-- Cleaning Service -->
+                <div class="bg-white rounded-xl shadow-md overflow-hidden group transform transition-all duration-300 hover:-translate-y-1 hover:shadow-lg">
+                    <div class="h-48 bg-gray-100 flex items-center justify-center">
+                        <img src="assets/images/default/categories/cleaning.svg" alt="Cleaning" class="h-24 w-24">
+                    </div>
+                    <div class="p-6">
+                        <div class="flex justify-between items-center">
+                            <h3 class="text-xl font-bold mb-2 group-hover:text-purple-600 transition">Cleaning</h3>
+                            <span class="text-lg font-semibold text-purple-600"></span>
+                        </div>
+                        <p class="text-gray-600">Thorough cleaning services for your space</p>
+                    </div>
+                </div>
+
+                <!-- Moving Service -->
+                <div class="bg-white rounded-xl shadow-md overflow-hidden group transform transition-all duration-300 hover:-translate-y-1 hover:shadow-lg">
+                    <div class="h-48 bg-gray-100 flex items-center justify-center">
+                        <img src="assets/images/default/categories/moving.svg" alt="Moving" class="h-24 w-24">
+                    </div>
+                    <div class="p-6">
+                        <div class="flex justify-between items-center">
+                            <h3 class="text-xl font-bold mb-2 group-hover:text-purple-600 transition">Moving</h3>
+                            <span class="text-lg font-semibold text-purple-600"></span>
+                        </div>
+                        <p class="text-gray-600">Reliable moving and relocation services</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works -->
+    <section id="how-it-works" class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="text-4xl font-bold text-gray-800 mb-4">How It Works</h2>
+                <p class="text-xl text-gray-600">Get started in just a few simple steps</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Step 1 -->
+                <div class="text-center p-6 bg-gray-50 rounded-2xl">
+                    <div class="w-16 h-16 bg-purple-100 text-purple-600 rounded-full flex items-center justify-center text-2xl font-bold mx-auto mb-4">1</div>
+                    <h3 class="text-xl font-bold mb-2">Find a Service</h3>
+                    <p class="text-gray-600">Search for the service you need and browse through verified providers in your area.</p>
+                </div>
+
+                <!-- Step 2 -->
+                <div class="text-center p-6 bg-gray-50 rounded-2xl">
+                    <div class="w-16 h-16 bg-purple-100 text-purple-600 rounded-full flex items-center justify-center text-2xl font-bold mx-auto mb-4">2</div>
+                    <h3 class="text-xl font-bold mb-2">Book & Pay</h3>
+                    <p class="text-gray-600">Select a provider, choose a time that works for you, and make a secure payment.</p>
+                </div>
+
+                <!-- Step 3 -->
+                <div class="text-center p-6 bg-gray-50 rounded-2xl">
+                    <div class="w-16 h-16 bg-purple-100 text-purple-600 rounded-full flex items-center justify-center text-2xl font-bold mx-auto mb-4">3</div>
+                    <h3 class="text-xl font-bold mb-2">Enjoy Your Service</h3>
+                    <p class="text-gray-600">Sit back and relax while your service professional takes care of everything.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Join as Provider Section -->
+    <section class="py-16 bg-gray-50">
+        <div class="container mx-auto px-4 text-center">
+            <div class="max-w-3xl mx-auto bg-white rounded-2xl shadow-lg p-8 md:p-12">
+                <h2 class="text-3xl md:text-4xl font-bold mb-6">Are you a service provider?</h2>
+                <p class="text-xl text-gray-600 mb-8">Join our platform to connect with customers and grow your business</p>
+                <a href="auth/register.html?type=provider" class="btn-primary inline-block">Become a Provider</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Review -->
+    <section id="Reviews" class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="text-4xl font-bold text-gray-800 mb-4">What Our Customers Say</h2>
+                <p class="text-xl text-gray-600">Trusted by thousands of satisfied customers</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Review 1 -->
+                <div class="bg-gray-50 rounded-2xl p-6 shadow-md">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 rounded-full bg-purple-100 flex items-center justify-center text-purple-600 text-xl font-bold mr-4">MZ</div>
+                        <div>
+                            <h4 class="font-bold">Mizanur Rahman</h4>
+                            <div class="flex text-amber-400">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="text-gray-600">"Found a great plumber within minutes. The service was excellent and the pricing was very reasonable. Highly recommended!"</p>
+                </div>
+
+                <!-- Review 2 -->
+                <div class="bg-gray-50 rounded-2xl p-6 shadow-md">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 rounded-full bg-blue-100 flex items-center justify-center text-blue-600 text-xl font-bold mr-4">AK</div>
+                        <div>
+                            <h4 class="font-bold">Akash Khan</h4>
+                            <div class="flex text-amber-400">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="text-gray-600">"The electrician arrived on time and fixed the issue quickly. Very professional and knowledgeable. Will definitely use again!"</p>
+                </div>
+
+                <!-- Review 3 -->
+                <div class="bg-gray-50 rounded-2xl p-6 shadow-md">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 rounded-full bg-green-100 flex items-center justify-center text-green-600 text-xl font-bold mr-4">RH</div>
+                        <div>
+                            <h4 class="font-bold">Rakib Hasan</h4>
+                            <div class="flex text-amber-400">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star-half-alt"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="text-gray-600">"Great platform to find reliable service providers. The cleaning service I booked did an amazing job. Very satisfied!"</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-16 gradient-bg text-white">
+        <div class="container mx-auto px-4 text-center">
+            <h2 class="text-3xl md:text-4xl font-bold mb-6">Ready to find your perfect service provider?</h2>
+            <p class="text-xl mb-8 max-w-2xl mx-auto">Join thousands of satisfied customers who found the right professional for their needs.</p>
+            <a href="search.html" class="inline-block bg-white text-purple-600 px-8 py-4 rounded-lg font-bold text-lg hover:bg-gray-100 transition">Browse Services</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-12">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <h3 class="text-xl font-bold mb-4">S24</h3>
+                    <p class="text-gray-400 mb-4">Connecting customers with trusted service providers since 2023.</p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-white transition"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white transition"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white transition"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white transition"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Services</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Plumbing</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Electrical</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Cleaning</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Moving</a></li>
+                        <li><a href="search.html" class="text-gray-400 hover:text-white transition">All Services</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Company</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">About Us</a></li>
+                        <li><a href="#how-it-works" class="text-gray-400 hover:text-white transition">How It Works</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Careers</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Press</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Blog</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Support</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Help Center</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Contact Us</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Privacy Policy</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Terms of Service</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">FAQ</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-gray-700 mt-12 pt-8 text-center text-gray-400">
+                <p>&copy; 2023 S24 Service Directory. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="assets/js/main.js"></script>
+</body>
+</html>
